@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+
+if [ $# -ne 1 ]
+then
+   echo "usage: make-type-array <c-type>" >&2
+   exit 1
+fi
+
+
+type="$1"
+
+if [ "$type" = "float" ]
+then
+   echo "don't use float" >&2
+   exit 1
+fi
+
+
+TYPE="`tr '[a-z]' '[A-Z]' <<< "${type}" `"
+
+
+for i in mulle*float*.[hc]
+do
+   sed -e "s/float/${type}/g"    \
+       -e "s/FLOAT/${TYPE}/g"    \
+       "${i}"                    \
+       > "${i//float/${type}}"
+done

@@ -1,0 +1,2 @@
+mulle-testallocator;${MULLE__TESTALLOCATOR_NODETYPE:-tar};no-import,no-singlephase;56A2AE98-1643-41FE-84F8-9AEA23067BBB;${MULLE__TESTALLOCATOR_URL:-https://github.com/mulle-core/mulle-testallocator/archive/${MULLE_TAG}.tar.gz};${MULLE__TESTALLOCATOR_BRANCH};${MULLE__TESTALLOCATOR_TAG:-latest};;
+mulle-fparray;${MULLE__FPARRAY_NODETYPE:-tar};;616B6A2C-EFF7-4F69-B4E7-8939154CB326;${MULLE__FPARRAY_URL:-https://github.com/mulle-kybernetik-tv/mulle-fparray/archive/${MULLE_TAG}.tar.gz};${MULLE__FPARRAY_BRANCH};${MULLE__FPARRAY_TAG:-latest};;

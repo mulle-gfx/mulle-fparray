@@ -1,0 +1,22 @@
+{
+   "name" : "mulle-fparray",
+   "version" : "0.0.1",
+   "description" : "mulle-fparray does something",
+   "keywords" : [],
+   "license" : "UNLICENSED",
+   "repo" : "mulle-gfx/mulle-fparray",
+   "src" : [
+      "src/float/mulle--floatarray.c",
+      "src/float/mulle--floatarray.h",
+      "src/float/mulle-floatarray.h",
+      "src/generic/include.h",
+      "src/mulle-fparray.c",
+      "src/mulle-fparray.h",
+      "src/reflect/_mulle-fparray-include.h",
+      "src/reflect/_mulle-fparray-provide.h"
+   ],
+   "dependencies" : {
+      "mulle-c/mulle-allocator": "*",
+      "mulle-c/mulle-data": "*"
+   }
+}
