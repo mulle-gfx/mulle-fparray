@@ -17,66 +17,65 @@ endif()
 # Disable for this platform: `mulle-sourcetree mark mulle-allocator no-cmake-platform-${MULLE_UNAME}`
 # Disable for a sdk: `mulle-sourcetree mark mulle-allocator no-cmake-sdk-<name>`
 #
-if( NOT MULLE_ALLOCATOR_LIBRARY)
-   if( DEPENDENCY_IGNORE_SYSTEM_LIBARIES)
-      find_library( MULLE_ALLOCATOR_LIBRARY NAMES
-         ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-allocator${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
-         ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-allocator${CMAKE_STATIC_LIBRARY_SUFFIX}
-         mulle-allocator
-         NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH
-      )
-   else()
-      find_library( MULLE_ALLOCATOR_LIBRARY NAMES
+if( NOT MULLE__ALLOCATOR_LIBRARY)
+   find_library( MULLE__ALLOCATOR_LIBRARY NAMES
+      ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-allocator${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
+      ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-allocator${CMAKE_STATIC_LIBRARY_SUFFIX}
+      mulle-allocator
+      NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH
+   )
+   if( NOT MULLE__ALLOCATOR_LIBRARY AND NOT DEPENDENCY_IGNORE_SYSTEM_LIBARIES)
+      find_library( MULLE__ALLOCATOR_LIBRARY NAMES
          ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-allocator${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
          ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-allocator${CMAKE_STATIC_LIBRARY_SUFFIX}
          mulle-allocator
       )
    endif()
-   message( STATUS "MULLE_ALLOCATOR_LIBRARY is ${MULLE_ALLOCATOR_LIBRARY}")
+   message( STATUS "MULLE__ALLOCATOR_LIBRARY is ${MULLE__ALLOCATOR_LIBRARY}")
    #
    # The order looks ascending, but due to the way this file is read
    # it ends up being descending, which is what we need.
    #
-   if( MULLE_ALLOCATOR_LIBRARY)
+   if( MULLE__ALLOCATOR_LIBRARY)
       #
-      # Add MULLE_ALLOCATOR_LIBRARY to DEPENDENCY_LIBRARIES list.
+      # Add MULLE__ALLOCATOR_LIBRARY to DEPENDENCY_LIBRARIES list.
       # Disable with: `mulle-sourcetree mark mulle-allocator no-cmake-add`
       #
-      list( APPEND DEPENDENCY_LIBRARIES ${MULLE_ALLOCATOR_LIBRARY})
+      list( APPEND DEPENDENCY_LIBRARIES ${MULLE__ALLOCATOR_LIBRARY})
       #
       # Inherit information from dependency.
       # Encompasses: no-cmake-searchpath,no-cmake-dependency,no-cmake-loader
       # Disable with: `mulle-sourcetree mark mulle-allocator no-cmake-inherit`
       #
       # temporarily expand CMAKE_MODULE_PATH
-      get_filename_component( _TMP_MULLE_ALLOCATOR_ROOT "${MULLE_ALLOCATOR_LIBRARY}" DIRECTORY)
-      get_filename_component( _TMP_MULLE_ALLOCATOR_ROOT "${_TMP_MULLE_ALLOCATOR_ROOT}" DIRECTORY)
+      get_filename_component( _TMP_MULLE__ALLOCATOR_ROOT "${MULLE__ALLOCATOR_LIBRARY}" DIRECTORY)
+      get_filename_component( _TMP_MULLE__ALLOCATOR_ROOT "${_TMP_MULLE__ALLOCATOR_ROOT}" DIRECTORY)
       #
       #
       # Search for "Definitions.cmake" and "DependenciesAndLibraries.cmake" to include.
       # Disable with: `mulle-sourcetree mark mulle-allocator no-cmake-dependency`
       #
-      foreach( _TMP_MULLE_ALLOCATOR_NAME "mulle-allocator")
-         set( _TMP_MULLE_ALLOCATOR_DIR "${_TMP_MULLE_ALLOCATOR_ROOT}/include/${_TMP_MULLE_ALLOCATOR_NAME}/cmake")
+      foreach( _TMP_MULLE__ALLOCATOR_NAME "mulle-allocator")
+         set( _TMP_MULLE__ALLOCATOR_DIR "${_TMP_MULLE__ALLOCATOR_ROOT}/include/${_TMP_MULLE__ALLOCATOR_NAME}/cmake")
          # use explicit path to avoid "surprises"
-         if( IS_DIRECTORY "${_TMP_MULLE_ALLOCATOR_DIR}")
-            list( INSERT CMAKE_MODULE_PATH 0 "${_TMP_MULLE_ALLOCATOR_DIR}")
+         if( IS_DIRECTORY "${_TMP_MULLE__ALLOCATOR_DIR}")
+            list( INSERT CMAKE_MODULE_PATH 0 "${_TMP_MULLE__ALLOCATOR_DIR}")
             #
-            include( "${_TMP_MULLE_ALLOCATOR_DIR}/DependenciesAndLibraries.cmake" OPTIONAL)
+            include( "${_TMP_MULLE__ALLOCATOR_DIR}/DependenciesAndLibraries.cmake" OPTIONAL)
             #
-            list( REMOVE_ITEM CMAKE_MODULE_PATH "${_TMP_MULLE_ALLOCATOR_DIR}")
+            list( REMOVE_ITEM CMAKE_MODULE_PATH "${_TMP_MULLE__ALLOCATOR_DIR}")
             #
-            unset( MULLE_ALLOCATOR_DEFINITIONS)
-            include( "${_TMP_MULLE_ALLOCATOR_DIR}/Definitions.cmake" OPTIONAL)
-            list( APPEND INHERITED_DEFINITIONS ${MULLE_ALLOCATOR_DEFINITIONS})
+            unset( MULLE__ALLOCATOR_DEFINITIONS)
+            include( "${_TMP_MULLE__ALLOCATOR_DIR}/Definitions.cmake" OPTIONAL)
+            list( APPEND INHERITED_DEFINITIONS ${MULLE__ALLOCATOR_DEFINITIONS})
             break()
          else()
-            message( STATUS "${_TMP_MULLE_ALLOCATOR_DIR} not found")
+            message( STATUS "${_TMP_MULLE__ALLOCATOR_DIR} not found")
          endif()
       endforeach()
    else()
       # Disable with: `mulle-sourcetree mark mulle-allocator no-require-link`
-      message( FATAL_ERROR "MULLE_ALLOCATOR_LIBRARY was not found")
+      message( FATAL_ERROR "MULLE__ALLOCATOR_LIBRARY was not found")
    endif()
 endif()
 
@@ -87,65 +86,64 @@ endif()
 # Disable for this platform: `mulle-sourcetree mark mulle-data no-cmake-platform-${MULLE_UNAME}`
 # Disable for a sdk: `mulle-sourcetree mark mulle-data no-cmake-sdk-<name>`
 #
-if( NOT MULLE_DATA_LIBRARY)
-   if( DEPENDENCY_IGNORE_SYSTEM_LIBARIES)
-      find_library( MULLE_DATA_LIBRARY NAMES
-         ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-data${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
-         ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-data${CMAKE_STATIC_LIBRARY_SUFFIX}
-         mulle-data
-         NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH
-      )
-   else()
-      find_library( MULLE_DATA_LIBRARY NAMES
+if( NOT MULLE__DATA_LIBRARY)
+   find_library( MULLE__DATA_LIBRARY NAMES
+      ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-data${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
+      ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-data${CMAKE_STATIC_LIBRARY_SUFFIX}
+      mulle-data
+      NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH
+   )
+   if( NOT MULLE__DATA_LIBRARY AND NOT DEPENDENCY_IGNORE_SYSTEM_LIBARIES)
+      find_library( MULLE__DATA_LIBRARY NAMES
          ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-data${CMAKE_DEBUG_POSTFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}
          ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-data${CMAKE_STATIC_LIBRARY_SUFFIX}
          mulle-data
       )
    endif()
-   message( STATUS "MULLE_DATA_LIBRARY is ${MULLE_DATA_LIBRARY}")
+   message( STATUS "MULLE__DATA_LIBRARY is ${MULLE__DATA_LIBRARY}")
    #
    # The order looks ascending, but due to the way this file is read
    # it ends up being descending, which is what we need.
    #
-   if( MULLE_DATA_LIBRARY)
+   if( MULLE__DATA_LIBRARY)
       #
-      # Add MULLE_DATA_LIBRARY to DEPENDENCY_LIBRARIES list.
+      # Add MULLE__DATA_LIBRARY to DEPENDENCY_LIBRARIES list.
       # Disable with: `mulle-sourcetree mark mulle-data no-cmake-add`
       #
-      list( APPEND DEPENDENCY_LIBRARIES ${MULLE_DATA_LIBRARY})
+      list( APPEND DEPENDENCY_LIBRARIES ${MULLE__DATA_LIBRARY})
       #
       # Inherit information from dependency.
       # Encompasses: no-cmake-searchpath,no-cmake-dependency,no-cmake-loader
       # Disable with: `mulle-sourcetree mark mulle-data no-cmake-inherit`
       #
       # temporarily expand CMAKE_MODULE_PATH
-      get_filename_component( _TMP_MULLE_DATA_ROOT "${MULLE_DATA_LIBRARY}" DIRECTORY)
-      get_filename_component( _TMP_MULLE_DATA_ROOT "${_TMP_MULLE_DATA_ROOT}" DIRECTORY)
+      get_filename_component( _TMP_MULLE__DATA_ROOT "${MULLE__DATA_LIBRARY}" DIRECTORY)
+      get_filename_component( _TMP_MULLE__DATA_ROOT "${_TMP_MULLE__DATA_ROOT}" DIRECTORY)
       #
       #
       # Search for "Definitions.cmake" and "DependenciesAndLibraries.cmake" to include.
       # Disable with: `mulle-sourcetree mark mulle-data no-cmake-dependency`
       #
-      foreach( _TMP_MULLE_DATA_NAME "mulle-data")
-         set( _TMP_MULLE_DATA_DIR "${_TMP_MULLE_DATA_ROOT}/include/${_TMP_MULLE_DATA_NAME}/cmake")
+      foreach( _TMP_MULLE__DATA_NAME "mulle-data")
+         set( _TMP_MULLE__DATA_DIR "${_TMP_MULLE__DATA_ROOT}/include/${_TMP_MULLE__DATA_NAME}/cmake")
          # use explicit path to avoid "surprises"
-         if( IS_DIRECTORY "${_TMP_MULLE_DATA_DIR}")
-            list( INSERT CMAKE_MODULE_PATH 0 "${_TMP_MULLE_DATA_DIR}")
+         if( IS_DIRECTORY "${_TMP_MULLE__DATA_DIR}")
+            list( INSERT CMAKE_MODULE_PATH 0 "${_TMP_MULLE__DATA_DIR}")
             #
-            include( "${_TMP_MULLE_DATA_DIR}/DependenciesAndLibraries.cmake" OPTIONAL)
+            include( "${_TMP_MULLE__DATA_DIR}/DependenciesAndLibraries.cmake" OPTIONAL)
             #
-            list( REMOVE_ITEM CMAKE_MODULE_PATH "${_TMP_MULLE_DATA_DIR}")
+            list( REMOVE_ITEM CMAKE_MODULE_PATH "${_TMP_MULLE__DATA_DIR}")
             #
-            unset( MULLE_DATA_DEFINITIONS)
-            include( "${_TMP_MULLE_DATA_DIR}/Definitions.cmake" OPTIONAL)
-            list( APPEND INHERITED_DEFINITIONS ${MULLE_DATA_DEFINITIONS})
+            unset( MULLE__DATA_DEFINITIONS)
+            include( "${_TMP_MULLE__DATA_DIR}/Definitions.cmake" OPTIONAL)
+            list( APPEND INHERITED_DEFINITIONS ${MULLE__DATA_DEFINITIONS})
             break()
          else()
-            message( STATUS "${_TMP_MULLE_DATA_DIR} not found")
+            message( STATUS "${_TMP_MULLE__DATA_DIR} not found")
          endif()
       endforeach()
    else()
       # Disable with: `mulle-sourcetree mark mulle-data no-require-link`
-      message( FATAL_ERROR "MULLE_DATA_LIBRARY was not found")
+      message( FATAL_ERROR "MULLE__DATA_LIBRARY was not found")
    endif()
 endif()

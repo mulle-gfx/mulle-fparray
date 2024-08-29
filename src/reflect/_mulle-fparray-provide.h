@@ -9,5 +9,12 @@
  *
  *      mulle-sde environment set MULLE_MATCH_TO_C_RUN DISABLE
  */
+#ifndef _mulle__fparray__provide_h__
+#define _mulle__fparray__provide_h__
+
+
 #include "mulle--floatarray.h"
 #include "mulle-floatarray.h"
+
+
+#endif

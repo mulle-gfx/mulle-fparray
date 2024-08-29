@@ -1,0 +1,3 @@
+The mulle-floatarray contained in this library is used as a known type in
+animation code MulleCA. It's almost identical to mulle-structarray from
+[mulle-container](https://github.com/mulle-container), but knows its type.
