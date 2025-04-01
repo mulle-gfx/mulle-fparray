@@ -1,1 +1,1 @@
-mulle-fparray;${MULLE__FPARRAY_NODETYPE:-tar};;E6E5BB79-BC11-42E0-9197-46D093496878;${MULLE__FPARRAY_URL:-https://github.com/nat/mulle-fparray/archive/${MULLE_TAG}.tar.gz};${MULLE__FPARRAY_BRANCH};${MULLE__FPARRAY_TAG:-latest};;
+mulle-fparray;${MULLE__FPARRAY_NODETYPE:-tar};;8D6D2EB8-51BE-4600-859E-653882D7889E;${MULLE__FPARRAY_URL:-https://github.com/mulle-kybernetik-tv/mulle-fparray/archive/${MULLE_TAG}.tar.gz};${MULLE__FPARRAY_BRANCH};${MULLE__FPARRAY_TAG:-latest};;
