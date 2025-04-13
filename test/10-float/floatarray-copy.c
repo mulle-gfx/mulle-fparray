@@ -36,7 +36,7 @@ static void  add_array( void)
       _mulle_floatarray_add( other, a);
    }
 
-   mulle_floatarray_add_array( array, other, mulle_range_make( 1, 8));
+   mulle_floatarray_add_floatarray( array, other, mulle_range_make( 1, 8));
 
    i     = 0;
    rover = mulle_floatarray_enumerate( array);

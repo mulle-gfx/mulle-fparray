@@ -120,10 +120,10 @@ void   _mulle__floatarray_zero_to_count( struct mulle__floatarray *array,
 
 
 void
-   _mulle__floatarray_add_array( struct mulle__floatarray *array,
-                                 struct mulle__floatarray *other,
-                                 struct mulle_range range,
-                                 struct mulle_allocator *allocator)
+   _mulle__floatarray_add_floatarray( struct mulle__floatarray *array,
+                                      struct mulle__floatarray *other,
+                                      struct mulle_range range,
+                                      struct mulle_allocator *allocator)
 {
    unsigned int   count;
    float          *buf;

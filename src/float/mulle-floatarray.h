@@ -78,8 +78,8 @@ static inline void   mulle_floatarray_init( struct mulle_floatarray *array,
 {
    if( array)
       _mulle_floatarray_init( array,
-                               capacity,
-                               allocator);
+                              capacity,
+                              allocator);
 }
 
 
@@ -101,9 +101,9 @@ static inline void
 
 static inline void
    mulle_floatarray_init_with_static_storage( struct mulle_floatarray *array,
-                                               unsigned int count,
-                                               void  *storage,
-                                               struct mulle_allocator *allocator)
+                                              unsigned int count,
+                                              void  *storage,
+                                              struct mulle_allocator *allocator)
 {
    if(  array)
    {
@@ -311,27 +311,27 @@ static inline float *
 
 
 static inline void
-   _mulle_floatarray_add_array( struct mulle_floatarray *array,
-                                struct mulle_floatarray *other,
-                                struct mulle_range range)
+   _mulle_floatarray_add_floatarray( struct mulle_floatarray *array,
+                                     struct mulle_floatarray *other,
+                                     struct mulle_range range)
 {
-   _mulle__floatarray_add_array( (struct mulle__floatarray *) array,
-                                 (struct mulle__floatarray *) other,
-                                 range,
-                                 array->allocator);
+   _mulle__floatarray_add_floatarray( (struct mulle__floatarray *) array,
+                                      (struct mulle__floatarray *) other,
+                                      range,
+                                      array->allocator);
 }
 
 
 static inline void
-   mulle_floatarray_add_array( struct mulle_floatarray *array,
-                               struct mulle_floatarray *other,
-                               struct mulle_range range)
+   mulle_floatarray_add_floatarray( struct mulle_floatarray *array,
+                                    struct mulle_floatarray *other,
+                                    struct mulle_range range)
 {
    if( array)
-      _mulle__floatarray_add_array( (struct mulle__floatarray *) array,
-                                    (struct mulle__floatarray *) other,
-                                    range,
-                                    array->allocator);
+      _mulle__floatarray_add_floatarray( (struct mulle__floatarray *) array,
+                                         (struct mulle__floatarray *) other,
+                                         range,
+                                         array->allocator);
 }
 
 
@@ -343,9 +343,9 @@ static inline void
       return;
 
    _mulle_floatarray_reset( array);
-   _mulle_floatarray_add_array( array,
-                                other,
-                                mulle_range_make_all());
+   _mulle_floatarray_add_floatarray( array,
+                                     other,
+                                     mulle_range_make_all());
 }
 
 // _mulle_floatarray_reserve is like _mulle_floatarray_advance but just for

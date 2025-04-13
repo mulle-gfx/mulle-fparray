@@ -305,10 +305,10 @@ static inline float *
 
 MULLE_C_NONNULL_FIRST
 void
-   _mulle__floatarray_add_array( struct mulle__floatarray *array,
-                                 struct mulle__floatarray *other,
-                                 struct mulle_range range,
-                                 struct mulle_allocator *allocator);
+   _mulle__floatarray_add_floatarray( struct mulle__floatarray *array,
+                                      struct mulle__floatarray *other,
+                                      struct mulle_range range,
+                                      struct mulle_allocator *allocator);
 
 
 MULLE_C_NONNULL_FIRST
@@ -318,7 +318,7 @@ static inline void
                             struct mulle_allocator *allocator)
 {
    _mulle__floatarray_reset( array);
-   _mulle__floatarray_add_array( array, other, mulle_range_make_all(), allocator);
+   _mulle__floatarray_add_floatarray( array, other, mulle_range_make_all(), allocator);
 }
 
 
