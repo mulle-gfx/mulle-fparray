@@ -6,7 +6,7 @@
 # A convenient way to add a new source file is:
 #    mulle-sde add src/foo.c
 #
-cmake_minimum_required( VERSION 3.13)
+cmake_minimum_required( VERSION 3.15...99.99)
 
 project( mulle-fparray VERSION 0.0.1 LANGUAGES C)
 

@@ -42,7 +42,7 @@ static void  add_array( void)
    rover = mulle_floatarray_enumerate( array);
    while( _mulle_floatarrayenumerator_next( &rover, &a))
    {
-      printf( "%d: %.0f\n", i, a);
+      mulle_printf( "%d: %.0f\n", i, a);
       ++i;
    }
    mulle_floatarrayenumerator_done( &rover);
@@ -56,7 +56,7 @@ static void  add_array( void)
 static void  run_test( void (*f)( void), char *name)
 {
    mulle_testallocator_reset();
-  // printf( "%s\n", name);
+  // mulle_printf( "%s\n", name);
    (f)();
    mulle_testallocator_reset();
 }

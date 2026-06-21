@@ -131,7 +131,7 @@ static void  simple( void)
 static void  run_test( void (*f)( void), char *name)
 {
    mulle_testallocator_reset();
-  // printf( "%s\n", name);
+  // mulle_printf( "%s\n", name);
    (f)();
    mulle_testallocator_reset();
 }

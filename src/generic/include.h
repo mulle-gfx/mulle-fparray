@@ -31,14 +31,16 @@
 #include "_mulle-fparray-include.h"
 
 #ifndef MULLE__FPARRAY_GLOBAL
-# ifdef MULLE__FPARRAY_BUILD
-#  define MULLE__FPARRAY_GLOBAL    MULLE_C_GLOBAL
+# if defined( MULLE__FPARRAY_BUILD) || defined( MULLE__GFX_BUILD)
+#  define MULLE__FPARRAY_GLOBAL        MULLE_C_GLOBAL
+#  define MULLE__FPARRAY_GLOBAL_VAR    MULLE_C_GLOBAL_VAR
 # else
 #  if defined( MULLE__FPARRAY_INCLUDE_DYNAMIC) || (defined( MULLE_INCLUDE_DYNAMIC) && ! defined( MULLE__FPARRAY_INCLUDE_STATIC))
-#   define MULLE__FPARRAY_GLOBAL   MULLE_C_GLOBAL
+#   define MULLE__FPARRAY_GLOBAL       MULLE_C_EXTERN_GLOBAL
 #  else
-#   define MULLE__FPARRAY_GLOBAL   extern
+#   define MULLE__FPARRAY_GLOBAL       extern
 #  endif
+#  define MULLE__FPARRAY_GLOBAL_VAR
 # endif
 #endif
 

@@ -304,6 +304,7 @@ static inline float *
 
 
 MULLE_C_NONNULL_FIRST
+MULLE__FPARRAY_GLOBAL
 void
    _mulle__floatarray_add_floatarray( struct mulle__floatarray *array,
                                       struct mulle__floatarray *other,

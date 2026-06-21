@@ -6,6 +6,7 @@
    "license" : "UNLICENSED",
    "repo" : "mulle-gfx/mulle-fparray",
    "src" : [
+      "asset/dox/TOC.md",
       "src/float/mulle--floatarray.c",
       "src/float/mulle--floatarray.h",
       "src/float/mulle-floatarray.h",
@@ -16,7 +17,6 @@
       "src/reflect/_mulle-fparray-provide.h"
    ],
    "dependencies" : {
-      "mulle-c/mulle-allocator": "*",
-      "mulle-c/mulle-data": "*"
+      "mulle-core/mulle-core": "*"
    }
 }
