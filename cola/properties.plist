@@ -1,0 +1,25 @@
+{
+   project =
+   {
+      description="🛸 mulle-fparray does something";
+      domain="github";
+      language="c";
+      dialect="c";
+      name="mulle-fparray";
+      user="mulle-gfx";
+      repo="mulle-fparray";
+      homepage="https://github.com/mulle-gfx/mulle-fparray";
+      license="UNLICENSED";
+   };
+   dependencies =
+   (
+      {
+         description="🌋 Almagamated library of mulle-core + mulle-concurrent + mulle-c";
+         domain="github";
+         name="mulle-core";
+         repo="mulle-core";
+         url="https://github.com/mulle-core/mulle-core";
+         user="mulle-core";
+      }
+   );
+}

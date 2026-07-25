@@ -1,16 +1,17 @@
 # mulle-fparray Library Documentation for AI
-<!-- Keywords: floating-point, dynamic-array, allocation, enumeration, graphics -->
+<!-- Keywords: floating-point, dynamic-array, allocator, enumeration, graphics, animation -->
 
 ## 1. Introduction & Purpose
 
 mulle-fparray is a C library providing dynamic, resizable arrays for floating-point
-numbers. It targets high-performance graphics and numerical computing where
-efficient memory management and fast array operations matter. It offers two tiers:
-an allocator-aware convenience wrapper (`mulle_floatarray`) with embedded allocator,
-and a base implementation (`mulle__floatarray`) requiring explicit allocator
-parameters — trading convenience for control. Part of the mulle-gfx ecosystem;
-depends on mulle-core for foundational types (`mulle_range`, `mulle_data`) and
-memory management (`mulle_allocator`).
+numbers. It is used as a known type in the MulleCA animation engine and closely
+resembles `mulle-structarray` from mulle-container, but with compile-time
+knowledge of its element type (`float`). It offers two tiers: an allocator-aware
+convenience wrapper (`mulle_floatarray`) with embedded allocator, and a base
+implementation (`mulle__floatarray`) requiring explicit allocator parameters —
+trading convenience for control. Part of the mulle-gfx ecosystem; depends on
+mulle-core for foundational types (`mulle_range`, `mulle_data`) and memory
+management (`mulle_allocator`).
 
 ## 2. Key Concepts & Design Philosophy
 
@@ -57,13 +58,15 @@ struct mulle__floatarray
 };
 ```
 
-- **Lifecycle:**
-  - `void _mulle__floatarray_init(struct mulle__floatarray *array, unsigned int capacity, struct mulle_allocator *allocator)` — allocate with given capacity.
-  - `void _mulle__floatarray_init_with_static_storage(struct mulle__floatarray *array, unsigned int count, float *storage, struct mulle_allocator *allocator)` — use caller buffer of `count` floats as initial storage.
-  - `void _mulle__floatarray_init_with_floats(struct mulle__floatarray *array, float *values, unsigned int n, struct mulle_allocator *allocator)` — allocate and copy `n` floats from `values`.
-  - `struct mulle__floatarray *mulle__floatarray_create(unsigned int capacity, struct mulle_allocator *allocator)` — heap-allocate struct and init in one call.
-  - `void _mulle__floatarray_done(struct mulle__floatarray *array, struct mulle_allocator *allocator)` — free internal storage (unless static).
-  - `void mulle__floatarray_destroy(struct mulle__floatarray *array, struct mulle_allocator *allocator)` — `_done` + free the struct itself.
+ - **Lifecycle:**
+   - `void _mulle__floatarray_init(struct mulle__floatarray *array, unsigned int capacity, struct mulle_allocator *allocator)` — allocate with given capacity.
+   - `void _mulle__floatarray_init_with_static_storage(struct mulle__floatarray *array, unsigned int count, float *storage, struct mulle_allocator *allocator)` — use caller buffer of `count` floats as initial storage.
+   - `void _mulle__floatarray_init_with_floats(struct mulle__floatarray *array, float *values, unsigned int n, struct mulle_allocator *allocator)` — allocate and copy `n` floats from `values`.
+   - `struct mulle__floatarray *mulle__floatarray_alloc(struct mulle_allocator *allocator)` — heap-allocate empty struct (does not init storage).
+   - `struct mulle__floatarray *mulle__floatarray_create(unsigned int capacity, struct mulle_allocator *allocator)` — heap-allocate struct and init in one call.
+   - `void _mulle__floatarray_done(struct mulle__floatarray *array, struct mulle_allocator *allocator)` — free internal storage (unless static).
+   - `void mulle__floatarray_destroy(struct mulle__floatarray *array, struct mulle_allocator *allocator)` — `_done` + free the struct itself.
+   - `MULLE__FLOATARRAY_INIT(storage, type, count)` — compound-literal initializer for stack or static allocation.
 
 - **Adding Elements:**
   - `void _mulle__floatarray_add(struct mulle__floatarray *array, float item, struct mulle_allocator *allocator)` — append; grows if full.
@@ -111,9 +114,10 @@ struct mulle__floatarrayenumerator
    float     *_sentinel;
 };
 ```
-- `struct mulle__floatarrayenumerator _mulle__floatarray_enumerate(struct mulle__floatarray *array)` — init forward enumerator.
-- `int _mulle__floatarrayenumerator_next(struct mulle__floatarrayenumerator *rover, float *item)` — return 1 and set `*item`, or 0 on exhaustion.
-- `void _mulle__floatarrayenumerator_done(struct mulle__floatarrayenumerator *rover)` — no-op on this type.
+ - `struct mulle__floatarrayenumerator _mulle__floatarray_enumerate(struct mulle__floatarray *array)` — init forward enumerator.
+ - `int _mulle__floatarrayenumerator_next(struct mulle__floatarrayenumerator *rover, float *item)` — return 1 and set `*item`, or 0 on exhaustion.
+ - `void _mulle__floatarrayenumerator_done(struct mulle__floatarrayenumerator *rover)` — no-op on this type.
+ - `mulle__floatarrayenumerator_empty` — macro expanding to `((struct mulle__floatarrayenumerator) { 0 })` for nil-safe code.
 
 #### `struct mulle__floatarrayreverseenumerator`
 ```c
@@ -123,9 +127,10 @@ struct mulle__floatarrayreverseenumerator
    float     *_sentinel;
 };
 ```
-- `struct mulle__floatarrayreverseenumerator _mulle__floatarray_reverseenumerate(struct mulle__floatarray *array)` — init reverse enumerator.
-- `int _mulle__floatarrayreverseenumerator_next(struct mulle__floatarrayreverseenumerator *rover, float *item)` — return 1 on backwards step, 0 when done.
-- `void _mulle__floatarrayreverseenumerator_done(struct mulle__floatarrayreverseenumerator *rover)` — no-op.
+ - `struct mulle__floatarrayreverseenumerator _mulle__floatarray_reverseenumerate(struct mulle__floatarray *array)` — init reverse enumerator.
+ - `int _mulle__floatarrayreverseenumerator_next(struct mulle__floatarrayreverseenumerator *rover, float *item)` — return 1 on backwards step, 0 when done.
+ - `void _mulle__floatarrayreverseenumerator_done(struct mulle__floatarrayreverseenumerator *rover)` — no-op.
+ - `mulle__floatarrayreverseenumerator_empty` — macro expanding to `((struct mulle__floatarrayreverseenumerator) { 0 })` for nil-safe code.
 
 #### Macros
 - `mulle__floatarray_for(array, item)` — forward iteration: declares an enumerator, calls `_next`.
@@ -145,13 +150,14 @@ struct mulle_floatarray
 ```
 Identical memory layout to base, with an extra `allocator` field. Functions with no allocator parameter read from `array->allocator`. Functions prefixed with `_` skip NULL-guard for performance.
 
-- **Lifecycle:**
-  - `struct mulle_floatarray *mulle_floatarray_alloc(struct mulle_allocator *allocator)` — malloc struct.
-  - `void _mulle_floatarray_init(struct mulle_floatarray *array, unsigned int capacity, struct mulle_allocator *allocator)` — init (no NULL guard).
-  - `void mulle_floatarray_init(struct mulle_floatarray *array, unsigned int capacity, struct mulle_allocator *allocator)` — init with NULL guard.
-  - `void _mulle_floatarray_init_with_static_storage(struct mulle_floatarray *array, unsigned int count, void *storage, struct mulle_allocator *allocator)` — init with pre-allocated buffer (no NULL guard).
-  - `void mulle_floatarray_init_with_static_storage(struct mulle_floatarray *array, unsigned int count, void *storage, struct mulle_allocator *allocator)` — init with pre-allocated buffer (NULL-guarded).
-  - `struct mulle_floatarray *mulle_floatarray_create(unsigned int capacity, struct mulle_allocator *allocator)` — alloc + init.
+ - **Lifecycle:**
+   - `struct mulle_floatarray *mulle_floatarray_alloc(struct mulle_allocator *allocator)` — heap-allocate empty struct (does not init storage).
+   - `void _mulle_floatarray_init(struct mulle_floatarray *array, unsigned int capacity, struct mulle_allocator *allocator)` — init (no NULL guard).
+   - `void mulle_floatarray_init(struct mulle_floatarray *array, unsigned int capacity, struct mulle_allocator *allocator)` — init with NULL guard.
+   - `void _mulle_floatarray_init_with_static_storage(struct mulle_floatarray *array, unsigned int count, void *storage, struct mulle_allocator *allocator)` — init with pre-allocated buffer (no NULL guard).
+   - `void mulle_floatarray_init_with_static_storage(struct mulle_floatarray *array, unsigned int count, void *storage, struct mulle_allocator *allocator)` — init with pre-allocated buffer (NULL-guarded).
+   - `struct mulle_floatarray *mulle_floatarray_create(unsigned int capacity, struct mulle_allocator *allocator)` — alloc + init.
+   - `MULLE_FLOATARRAY_INIT(storage, count, allocator)` — compound-literal initializer for stack or static allocation.
   - `void _mulle_floatarray_done(struct mulle_floatarray *array)` — free internal storage (no NULL guard).
   - `void mulle_floatarray_done(struct mulle_floatarray *array)` — free internal storage (NULL-guarded).
   - `void mulle_floatarray_destroy(struct mulle_floatarray *array)` — done + free struct.
