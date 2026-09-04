@@ -8,7 +8,7 @@
 #
 cmake_minimum_required( VERSION 3.15...99.99)
 
-project( mulle-fparray VERSION 0.0.1 LANGUAGES C)
+project( mulle-fparray VERSION 0.0.2 LANGUAGES C)
 
 # if use embedded project with symlinks and you want to distribute their
 # headers you probably need to turn this on

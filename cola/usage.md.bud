@@ -1,0 +1,28 @@
+## Usage
+
+A typed, growable array of `float`. `_mulle_floatarray_advance` hands you
+storage that is already counted as used:
+
+``` c
+#include <mulle-fparray/mulle-fparray.h>
+
+int  main( void)
+{
+   struct mulle_floatarray  array;
+
+   mulle_floatarray_init( &array, 4, NULL);
+
+   float  *slot = _mulle_floatarray_advance( &array, 3);
+   slot[ 0] = 1.0f;
+   slot[ 1] = 2.0f;
+   slot[ 2] = 3.0f;
+
+   float  sum = 0.0f;
+   float  value;
+   mulle_floatarray_for( &array, value)
+      sum += value;
+
+   mulle_floatarray_done( &array);
+   return( 0);
+}
+```

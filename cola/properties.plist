@@ -1,7 +1,7 @@
 {
    project =
    {
-      description="🛸 mulle-fparray does something";
+      description="🛸 A typed, growable array of floats";
       domain="github";
       language="c";
       dialect="c";
@@ -10,6 +10,7 @@
       repo="mulle-fparray";
       homepage="https://github.com/mulle-gfx/mulle-fparray";
       license="UNLICENSED";
+      version="0.0.2";
    };
    dependencies =
    (

@@ -1,10 +1,11 @@
 # mulle-fparray
 
-#### 🛸 mulle-fparray does something
+#### 🛸 A typed, growable array of floats
 
 The mulle-floatarray contained in this library is used as a known type in
 animation code MulleCA. It's almost identical to mulle-structarray from
-[mulle-container](https://github.com/mulle-container), but knows its type.
+[mulle-container](https://github.com/mulle-container), but the element type
+(`float`) is fixed and known at compile time.
 
 
 
@@ -15,6 +16,39 @@ animation code MulleCA. It's almost identical to mulle-structarray from
 
 
 
+## Documentation & Guides
+
+* [API Summary](asset/dox/api/toc)
+* [Coder Guide](asset/howto/coder/mulle-fparray)
+
+## Usage
+
+A typed, growable array of `float`. `_mulle_floatarray_advance` hands you
+storage that is already counted as used:
+
+``` c
+#include <mulle-fparray/mulle-fparray.h>
+
+int  main( void)
+{
+   struct mulle_floatarray  array;
+
+   mulle_floatarray_init( &array, 4, NULL);
+
+   float  *slot = _mulle_floatarray_advance( &array, 3);
+   slot[ 0] = 1.0f;
+   slot[ 1] = 2.0f;
+   slot[ 2] = 3.0f;
+
+   float  sum = 0.0f;
+   float  value;
+   mulle_floatarray_for( &array, value)
+      sum += value;
+
+   mulle_floatarray_done( &array);
+   return( 0);
+}
+```
 
 
 ### You are here
