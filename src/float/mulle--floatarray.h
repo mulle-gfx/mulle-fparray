@@ -101,6 +101,7 @@ static inline void   _mulle__floatarray_init( struct mulle__floatarray *array,
 }
 
 
+MULLE__FPARRAY_GLOBAL
 MULLE_C_NONNULL_FIRST
 void   _mulle__floatarray_init_with_floats( struct mulle__floatarray *array,
                                             float *values,
