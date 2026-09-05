@@ -23,7 +23,6 @@ src
 set( PUBLIC_GENERATED_HEADERS
 src/reflect/_mulle-fparray-include.h
 src/reflect/_mulle-fparray-provide.h
-src/reflect/_mulle-fparray-versioncheck.h
 )
 
 #
