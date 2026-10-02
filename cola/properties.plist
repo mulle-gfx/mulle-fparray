@@ -10,7 +10,7 @@
       repo="mulle-fparray";
       homepage="https://github.com/mulle-gfx/mulle-fparray";
       license="UNLICENSED";
-      version="0.0.2";
+      version="0.0.3";
    };
    dependencies =
    (

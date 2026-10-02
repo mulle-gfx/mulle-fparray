@@ -1,6 +1,6 @@
 {
    "name" : "mulle-fparray",
-   "version" : "0.0.2",
+   "version" : "0.0.3",
    "description" : "🛸 A typed, growable array of floats",
    "keywords" : [],
    "license" : "UNLICENSED",
