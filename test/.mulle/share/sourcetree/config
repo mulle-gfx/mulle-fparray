@@ -1,1 +1,1 @@
-mulle-fparray;${MULLE__FPARRAY_NODETYPE:-tar};;214C222A-9878-4FE6-9EA4-92496D5571A6;${MULLE__FPARRAY_URL:-https://github.com/mulle-gfx/mulle-fparray/archive/${MULLE_TAG}.tar.gz};${MULLE__FPARRAY_BRANCH};${MULLE__FPARRAY_TAG:-latest};;
+mulle-fparray;${MULLE__FPARRAY_NODETYPE:-tar};;8FED5E1E-8C07-4560-BD04-6BB9D08AE00D;${MULLE__FPARRAY_URL:-https://github.com/nat/mulle-fparray/archive/${MULLE_TAG}.tar.gz};${MULLE__FPARRAY_BRANCH};${MULLE__FPARRAY_TAG:-latest};;
